@@ -35,7 +35,9 @@ const CaseStudySlider = ({ url }) => {
             {display ? <OwlCarousel
                 className="case-study-slides owl-carousel owl-theme"
                 {...options}
+
             > 
+            
             {data?.map((item)=>{
                 return <div className="single-case-study-item ptb-100">
                 <div className="container">
@@ -66,7 +68,9 @@ const CaseStudySlider = ({ url }) => {
                     </div>
                 </div>
             </div>
+            
             })}
+            
             </OwlCarousel> : <></>}
         </div>
     )

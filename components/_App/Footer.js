@@ -13,7 +13,6 @@ const Footer = ({ data }) => {
                             <a href="/" className="logo">
                                 <img src={data?.data?.footer_icon} alt="logo" className="footer_icon" />
                             </a>
-                            <p>Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse.</p>
 
                             <ul className="social-link">
                                 {data?.data?.social_media.map((item)=>{

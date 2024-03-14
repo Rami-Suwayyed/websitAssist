@@ -1,15 +1,18 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
+
 import dynamic from 'next/dynamic';
 const ModalVideo = dynamic(() => import('react-modal-video'), {
     ssr: false
 });
-import Link from 'next/link';
 
 const MainBanner = () => {
     const [isOpen, setIsOpen] = React.useState(true);
     const openModal = () => {
         setIsOpen(!isOpen);
     }
+    const { t } = useTranslation();
+
     return (
         <>
             {/* If you want to change the video need to update videoID */}
@@ -31,7 +34,7 @@ const MainBanner = () => {
                                         animate__fadeInLeft 
                                         animate__delay-0.1s
                                     "
-                                >Assisting Your Rise
+                                >{t("Assisting Your Rise")}
                                 </h1>
                          
                                 <p 
@@ -40,7 +43,7 @@ const MainBanner = () => {
                                         animate__fadeInLeft 
                                         animate__delay-0.1s
                                     "
-                                >Assisting Brands To Thrive in Today’s Competitive Market Using The “Solid-Business” Approach</p>
+                                >{t("Assisting Brands To Thrive in Today’s Competitive Market Using The “Solid-Business” Approach")}</p>
                      
                                 <div className="btn-box animate__animated animate__fadeInRight animate__delay-0.1s">
                                   

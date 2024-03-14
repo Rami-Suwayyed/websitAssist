@@ -1,7 +1,8 @@
 import React from 'react';
-import Link from 'next/link';
+import { useTranslation } from 'react-i18next';
 
 const ContactInfo = ({ data }) => {
+    const { t } = useTranslation();
 
     return (
         <>
@@ -17,7 +18,7 @@ const ContactInfo = ({ data }) => {
                             <div className="icon">
                                 <i className='bx bx-map'></i>
                             </div>
-                            <h3>Our Address</h3>
+                            <h3>{t("Our Address")}</h3>
                             <p>{item?.address}</p>
                         </div>
                     </div>
@@ -30,9 +31,9 @@ const ContactInfo = ({ data }) => {
                             <div className="icon">
                                 <i className='bx bx-phone-call'></i>
                             </div>
-                            <h3>Contact</h3>
-                            <p>Mobile: <a href="tel:+44457895789">{item?.phone_number}</a></p>
-                            <p>E-mail: <a href="mailto:hello@tracer.com">{item?.email}</a></p>
+                            <h3>{t("Contact")}</h3>
+                            <p>{t("Mobile")}: <a href="tel:+44457895789">{item?.phone_number}</a></p>
+                            <p>{t("E-mail")}: <a href="mailto:hello@tracer.com">{item?.email}</a></p>
                         </div>
                     </div>
 
@@ -44,9 +45,9 @@ const ContactInfo = ({ data }) => {
                             <div className="icon">
                                 <i className='bx bx-time-five'></i>
                             </div>
-                            <h3>Hours of Operation</h3>
+                            <h3>{t("Hours of Operation")}</h3>
                             {/* <p>Monday - Friday: 09:00 - 20:00</p> */}
-                            <p>Sunday & Thursday: 09:30 - 17:00</p>
+                            <p>{t("Sunday - Thursday")}: 09:30 - 17:00</p>
                         </div>
                     </div>
                 </div>

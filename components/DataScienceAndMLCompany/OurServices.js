@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import axios from 'axios';
-
+import { useTranslation } from 'react-i18next';
+import Reactparser from 'html-react-parser'
 const OurServices = ({ url }) => {
     const [data, setData] = useState(null);
+    const { t } = useTranslation();
+
     const getSliderData = async () => {
         await axios.get(`${url}/get_services`).then((res) => {
             setData(res.data?.data);
@@ -19,25 +22,24 @@ const OurServices = ({ url }) => {
                 <div className="section-title">
                     <span className="sub-title">
                         <img src="/img/star-icon.png" alt="image" />
-                        Our Services
+                        {t("Our Services")}
                     </span>
-                    <h2>We Offer Professional Solutions For Business</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.</p>
+                    <h2>{t("We Offer Professional Solutions For Business")}</h2>
                 </div>
 
                 <div className="row">
                     {data?.map((item) => {
-                        return <div className="col-lg-4 col-md-6 col-sm-6">
+                        return <div className="col-lg-4 col-md-6 col-sm-6 box-services">
                             <div className="single-services-box">
                                 <div className="icon">
                                     <img src={item?.image} alt="image" className='serverImage' />
                                 </div>
-                                <h3>
+                                <h5>
                                     <Link href={`/show-service/${item?.slug}`}>
                                         <a>{item?.title}</a>
                                     </Link>
-                                </h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.</p>
+                                </h5>
+                                <p>{item?.description && Reactparser(item?.description)}</p>
 
                                 <Link href={`/show-service/${item?.slug}`}>
                                     <a className="read-more-btn">

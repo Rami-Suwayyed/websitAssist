@@ -3,7 +3,7 @@ import Link from 'next/link';
 import dynamic from 'next/dynamic';
 const OwlCarousel = dynamic(import('react-owl-carousel3'));
 import axios from 'axios';
-
+import { useTranslation } from 'react-i18next';
 const options = {
     loop: true,
     nav: true,
@@ -32,9 +32,12 @@ const options = {
 const Testimonials = ({ url }) => {
     const [display, setDisplay] = React.useState(false);
     const [data, setData] = useState(null);
+    const {t, i18n} = useTranslation();
 
     const getAboutData = async () => {
-        await axios.get(`${url}/get_project`).then((res) => {
+        await axios.get(`${url}/get_project`,{
+            
+        }).then((res) => {
             setData(res.data?.data);
         }).catch((err) => {
             console.log(err);

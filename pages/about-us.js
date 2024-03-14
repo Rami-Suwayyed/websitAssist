@@ -9,8 +9,11 @@ import AboutUsContent from '../components/AboutUs/AboutUsContent';
 // import Partner from '../components/AboutUs/Partner';
 import axios from 'axios';
 import OurMission from '../components/AboutUsTwo/OurMissionTwo';
+import { useTranslation } from 'react-i18next';
+
 const AboutUs = ({ url }) => {
     const [data, setData] = useState(null);
+    const { t } = useTranslation();
 
     const getAboutData = async () => {
         await axios.get(`${url}/get_about`).then((res) => {
@@ -27,10 +30,9 @@ const AboutUs = ({ url }) => {
     return (
         <>
             <PageBanner
-                pageTitle="About Us"
-                homePageText="Home"
+                pageTitle={t("About Us")}
+                homePageText={t("Home")}
                 homePageUrl="/"
-                activePageText="About Us"
             />
             <AboutUsContent data={data} />
             <OurMission data={data}/>

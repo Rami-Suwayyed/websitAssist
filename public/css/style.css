@@ -69,7 +69,9 @@ Default CSS
 :root {
   scroll-behavior: inherit;
 }
-
+.owl-carousel{
+  direction: ltr !important;
+}
 body {
   padding: 0;
   margin: 0;
@@ -84,13 +86,43 @@ body {
   height: 6rem;
   background-color: transparent;
 }
+.box-services{
+  height: 350px !important;
+  margin-bottom: 20px;
+}
 .getStartedButton .selectLan{
   padding: 5px;
   margin: 5px;
+  margin-right: 30px;
   margin-top: 8px !important;
   border-radius: 8px;
   color: var(--text2-color);
   border: 1px solid var(--border-color);
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+}
+.cards{
+  display: flex;
+  justify-content: center;
+  
+}
+.card-container img{
+  height: 100px;
+  position: relative;
+  width: 200px;
+  margin-bottom: 15px;
+     
+}
+.card-container{
+  height: 300px;
+  padding: 20px;
+  border: 1px solid var(--border-color);
+  width: 300px;
+  text-align: center;
+  margin: 20px;
+  border-radius: 8px;
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
   -ms-border-radius: 8px;
@@ -3285,6 +3317,7 @@ Services Area CSS
   position: relative;
   border-radius: 5px;
   z-index: 1;
+  height: 100%;
   overflow: hidden;
 }
 
@@ -12073,7 +12106,7 @@ Go Top CSS
   bottom: -100px;
   right: 20px;
   color: var(--white-color);
-  background-color: var(--text2-color);
+  background: #0c69ff;
   z-index: 4;
   width: 45px;
   text-align: center;
@@ -12184,6 +12217,8 @@ Go Top CSS
     -ms-transform: translateX(-50%);
     -o-transform: translateX(-50%);
 }
-
+.cards{
+  flex-direction: column !important;
+}
 }
 /*# sourceMappingURL=style.css.map */

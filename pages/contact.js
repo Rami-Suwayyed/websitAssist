@@ -3,8 +3,12 @@ import PageBanner from '../components/Common/PageBanner';
 import ContactInfo from '../components/Contact/ContactInfo';
 import ContactForm from '../components/Contact/ContactForm';
 import axios from 'axios'
+import Branches from '../components/Contact/Branches';
+import { useTranslation } from 'react-i18next';
+
 const Contact = ({ url }) => {
     const [data, setData] = useState(null);
+    const { t } = useTranslation();
 
     const getAboutData = async () => {
         await axios.get(`${url}/get_branch_data`).then((res) => {
@@ -22,15 +26,16 @@ const Contact = ({ url }) => {
         <>
 
             <PageBanner
-                pageTitle="Contact"
-                homePageText="Home"
+                pageTitle={t("Contact")}
+                homePageText={t("Home")}
                 homePageUrl="/"
-                activePageText="Contact"
+               
             />
 
             <ContactInfo data={data}/>
 
             <ContactForm />
+            <Branches data={data}/>
 
         </>
     );

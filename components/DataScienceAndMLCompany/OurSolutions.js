@@ -1,17 +1,20 @@
 import React from 'react';
 import Link from 'next/link';
+import { useTranslation } from 'react-i18next';
 
 const OurSolutions = () => {
+    const { t } = useTranslation();
+
     return (
         <section className="solutions-area pb-70">
             <div className="container">
                 <div className="section-title">
                     <span className="sub-title">
                         <img src="/img/star-icon.png" alt="image" /> 
-                        Our Solutions
+                        {t("Our Solutions")}
                     </span>
-                    <h2>One-Stop Solution For Business Accelerating</h2>
-                    <p>To Save money and time, and get a consistent quality of work with less headache.</p>
+                    <h2>{t("One-Stop Solution For Business Accelerating")}</h2>
+                    <p>{t("To Save money and time, and get a consistent quality of work with less headache.")}</p>
                 </div>
 
                 <div className="row">
@@ -22,10 +25,10 @@ const OurSolutions = () => {
                             </div>
                             <h3>
                                 <Link href="/service-details">
-                                    <a>Business Improvement</a>
+                                    <a>{t("Business Improvement")}</a>
                                 </Link>
                             </h3>
-                            <p>Unlock the full potential of your business with our dedicated Business Improvement solution. Our expert consultants work closely with you to identify inefficiencies, streamline processes, and implement strategies for enhanced productivity and profitability.</p>
+                            <p>{t("Unlock the full potential of your business with our dedicated Business Improvement solution. Our expert consultants work closely with you to identify inefficiencies, streamline processes, and implement strategies for enhanced productivity and profitability.")}</p>
 
                             {/* <Link href="/service-details">
                                 <a className="view-details-btn">View Details</a>
@@ -40,10 +43,10 @@ const OurSolutions = () => {
                             </div>
                             <h3>
                                 <Link href="/service-details">
-                                    <a>Marketing Systems</a>
+                                    <a>{t("Marketing Systems")}</a>
                                 </Link>
                             </h3>
-                            <p>Navigate the dynamic landscape of modern business with confidence through our advanced Marketing Systems. Tailored to meet your unique needs, our systems leverage the latest technologies and data-driven insights.</p>
+                            <p>{t("Navigate the dynamic landscape of modern business with confidence through our advanced Marketing Systems. Tailored to meet your unique needs, our systems leverage the latest technologies and data-driven insights.")}</p>
                             
                         </div>
                     </div>
@@ -55,10 +58,10 @@ const OurSolutions = () => {
                             </div>
                             <h3>
                                 <Link href="/service-details">
-                                    <a>Branding and Design</a>
+                                    <a>{t("Branding and Design")}</a>
                                 </Link>
                             </h3>
-                            <p>Leave a lasting impression with our exceptional Branding and Design solutions. Our creative team brings your brand to life, crafting compelling visual identities that resonate with your target audience. Whether it's a brand refresh, logo design, or complete visual overhaul, we ensure your brand stands out in a crowded market.</p>
+                            <p>{t("Leave a lasting impression with our exceptional Branding and Design solutions. Our creative team brings your brand to life, crafting compelling visual identities that resonate with your target audience. Whether it's a brand refresh, logo design, or complete visual overhaul, we ensure your brand stands out in a crowded market.")}</p>
                             
                             
                         </div>

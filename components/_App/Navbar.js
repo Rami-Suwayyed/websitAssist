@@ -1,17 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil'
 import { collapsedState } from '../../utils/recoil-atoms'
 import LinkN from '../../utils/ActiveLink';
+import { useTranslation } from 'react-i18next';
+import Head from 'next/head';
 
-const Navbar = ({data}) => {
+const Navbar = ({ data }) => {
     const [collapsed, setCollapsed] = useRecoilState(collapsedState);
     const [selecLan, setLan] = useState("");
+    const [direction, setDirection] = useState('ltr');
 
+    const { t, i18n } = useTranslation();
     const toggleNavbar = () => {
         setCollapsed(!collapsed);
     }
-
-    React.useEffect(() => {
+    const changeLanguage = (lang) => {
+        i18n.changeLanguage(lang);
+        setLan(lang);
+      };
+    useEffect(() => {
         let elementId = document.getElementById("navbar");
         document.addEventListener("scroll", () => {
             if (window?.scrollY > 170) {
@@ -23,15 +30,41 @@ const Navbar = ({data}) => {
         window?.scrollTo(0, 0);
         // const lang = document.getElementsByTagName("body");
         // if (selecLan === "AR") {
-             
+
         // }
     })
+    // useEffect(() => {
+    //     if (selecLan === "AR") {
+    //         document.getElementById("root")?.style?.direction = "rtl";
+    //     }
+    //     else{
+    //         document.getElementById("root")?.style?.direction = "ltr";
+    //     }
+    // }, [selecLan])
+    useEffect(() => {
+        if (selecLan === 'ar') {
+            setDirection('rtl');
+            changeLanguage("ar")
+        } else {
+            setDirection('ltr');
+            changeLanguage("en")
+        }
+    }, [selecLan]);
 
     const classOne = collapsed ? 'collapse navbar-collapse' : 'collapse navbar-collapse show';
     const classTwo = collapsed ? 'navbar-toggler navbar-toggler-right collapsed' : 'navbar-toggler navbar-toggler-right';
 
     return (
         <>
+            <Head>
+                <style>
+                    {`
+            #__next {
+              direction: ${direction};
+            }
+          `}
+                </style>
+            </Head>
             <div id="navbar" className="navbar-area">
                 <div className="tarn-nav">
                     <div className="container-fluid">
@@ -58,7 +91,7 @@ const Navbar = ({data}) => {
                                 <li className="nav-item">
                                     <LinkN href="/" activeClassName="active">
                                         <a onClick={() => setCollapsed(true)} className="nav-LinkN">
-                                            Home
+                                            {t('Home')}
                                         </a>
                                     </LinkN>
 
@@ -68,15 +101,17 @@ const Navbar = ({data}) => {
                                 <li className="nav-item">
                                     <LinkN href="/about-us" activeClassName="active">
                                         <a onClick={() => setCollapsed(true)} className="nav-LinkN">
-                                            About Us
+                                        {t('About Us')}
+
                                         </a>
                                     </LinkN>
+                                    
                                 </li>
 
                                 <li className="nav-item">
                                     <LinkN href="#service_section" >
                                         <a className='servicesItem'>
-                                            Services
+                                            {t("Services")}
                                         </a>
                                     </LinkN>
 
@@ -127,7 +162,7 @@ const Navbar = ({data}) => {
                                 <li className="nav-item">
                                     <LinkN href="/contact">
                                         <a className="nav-LinkN" onClick={() => setCollapsed(true)}>
-                                            Contact
+                                            {t("Contact")}
                                         </a>
                                     </LinkN>
 
@@ -275,12 +310,12 @@ const Navbar = ({data}) => {
 
                                     <div className="option-item getStartedButton">
                                         <select className="selectLan" onChange={(e) => setLan(e.target.value)}>
-                                            <option>EN</option>
-                                            <option>AR</option>
+                                            <option>en</option>
+                                            <option>ar</option>
                                         </select>
                                         <LinkN href="/contact">
                                             <a onClick={() => setCollapsed(true)} className="default-btn">
-                                                <i className="flaticon-right"></i> Get Started <span></span>
+                                                <i className="flaticon-right"></i> {t("Contact now")} <span></span>
                                             </a>
                                         </LinkN>
                                     </div>
