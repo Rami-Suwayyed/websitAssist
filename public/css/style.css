@@ -2276,7 +2276,9 @@ Solutions Area CSS
 .solutions-area .section-title {
   max-width: 695px;
 }
-
+.contact-info-area{
+  direction: ltr !important;
+}
 .single-solutions-box {
   margin-bottom: 30px;
   padding: 50px 30px;
