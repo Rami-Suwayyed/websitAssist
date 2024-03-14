@@ -82,6 +82,9 @@ body {
   display: flex;
   align-items: center;
 }
+.single-solutions-box{
+  height: 100%;
+}
 .footer_icon{
   height: 6rem;
   background-color: transparent;
@@ -90,6 +93,11 @@ body {
   height: 350px !important;
   margin-bottom: 20px;
 }
+
+.ourSolution{
+  height: 450px !important;
+}
+
 .getStartedButton .selectLan{
   padding: 5px;
   margin: 5px;
@@ -2272,6 +2280,7 @@ Solutions Area CSS
 .single-solutions-box {
   margin-bottom: 30px;
   padding: 50px 30px;
+
   border-radius: 5px;
   -webkit-transition: 0.5s;
   transition: 0.5s;
@@ -11860,6 +11869,7 @@ Footer Area CSS
 .footer-area {
   padding-top: 100px;
   position: relative;
+  direction: ltr !important;
   z-index: 1;
 }
 

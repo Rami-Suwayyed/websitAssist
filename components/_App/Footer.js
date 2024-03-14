@@ -1,8 +1,22 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useTranslation } from 'react-i18next';
+import axios from 'axios';
 
-const Footer = ({ data }) => {
+const Footer = ({ data, url }) => {
+    const { t } = useTranslation();
+    const [dataServer, setDataServer] = useState(null);
 
+    const getSliderData = async () => {
+        await axios.get(`${url}/get_services`).then((res) => {
+            setDataServer(res.data?.data);
+
+        }).catch((err) => console.log(err))
+    }
+    useEffect(() => {
+        getSliderData();
+    }, []);
+    console.log("dataServer>>",dataServer)
     const currentYear = new Date().getFullYear();
     return (
         <footer className="footer-area bg-color">
@@ -31,75 +45,55 @@ const Footer = ({ data }) => {
 
                     <div className="col-lg-2 col-sm-6">
                         <div className="single-footer-widget pl-5">
-                            <h3>Explore</h3>
+                            <h3>{t("Explore")}</h3>
 
                             <ul className="footer-links-list">
                                 <li>
                                     <Link href="/">
-                                        <a>Home</a>
+                                        <a>{t("Home")}</a>
                                     </Link>
                                 </li>
                                 <li>
                                     <Link href="/about-us">
-                                        <a>About</a>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link href="/case-studies-2-columns">
-                                        <a>Case Studies</a>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link href="/blog">
-                                        <a>Our Blog</a>
+                                        <a>{t("About Us")}</a>
                                     </Link>
                                 </li>
                                 <li>
                                     <Link href="/contact">
-                                        <a href="contact.html">Contact</a>
+                                        <a>{t("Contact")}</a>
                                     </Link>
                                 </li>
+                                <li>
+                                    <Link href="#service_section">
+                                        <a>{t("Services")}</a>
+                                    </Link>
+                                </li>
+                              
                             </ul>
                         </div>
                     </div>
 
                     <div className="col-lg-2 col-sm-6">
                         <div className="single-footer-widget">
-                            <h3>Resources</h3>
+                            <h3>{t("Our Services")}</h3>
 
                             <ul className="footer-links-list">
-                                <li>
-                                    <Link href="/team">
-                                        <a>Our Scientists</a>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link href="/services">
-                                        <a>Our Services</a>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link href="/testimonials">
-                                        <a>Testimonials</a>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link href="/services">
-                                        <a>SaaS Solutions</a>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link href="/case-studies-2-columns">
-                                        <a>Case Studies</a>
-                                    </Link>
-                                </li>
+                                {dataServer?.slice(0,3)?.map((item)=>{
+                                    return    <li>
+                                    <Link href={`/show-service/${item?.slug}`}>
+                                            <a>{item?.title}</a>
+                                        </Link>
+                                    </li>
+                                })}
+                             
+                           
                             </ul>
                         </div>
                     </div>
 
                     <div className="col-lg-4 col-sm-6">
                         <div className="single-footer-widget">
-                            <h3>Address</h3>
+                            <h3>{t("Address")}</h3>
 
                             <ul className="footer-contact-info">
                                 <li>

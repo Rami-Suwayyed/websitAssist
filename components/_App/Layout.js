@@ -37,7 +37,7 @@ const Layout = ({ children, url }) => {
             </Head>
             <Navbar data={data} />
             {children}
-            <Footer data={data} />
+            <Footer data={data} url={url}/>
             <GoTop scrollStepInPx="100" delayInMs="10.50" />
         </>
     );
