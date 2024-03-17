@@ -4,20 +4,46 @@ import { collapsedState } from '../../utils/recoil-atoms'
 import LinkN from '../../utils/ActiveLink';
 import { useTranslation } from 'react-i18next';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 const Navbar = ({ data }) => {
     const [collapsed, setCollapsed] = useRecoilState(collapsedState);
-    const [selecLan, setLan] = useState("");
-    const [direction, setDirection] = useState('ltr');
+    const [selecLan, setLan] = useState(() => {
+        if (typeof localStorage !== 'undefined') {
+            return localStorage.getItem("lang") || "en";
+        } else {
+            return "en"; // Default language if localStorage is not available
+        }
+    });    const [direction, setDirection] = useState('ltr');
+    const router = useRouter();
 
+    const handleClick = () => {
+        if (router.pathname === '/') {
+            const serviceSection = document.getElementById('service_section');
+            if (serviceSection) {
+                serviceSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        } else {
+
+            router.push('/#service_section');
+        }
+    };
+
+    const changeLang = (e) => {
+        setLan(e.target.value);
+        localStorage.setItem("lang", e.target.value);
+        changeLanguage(e.target.value);
+
+    }
     const { t, i18n } = useTranslation();
     const toggleNavbar = () => {
         setCollapsed(!collapsed);
     }
     const changeLanguage = (lang) => {
         i18n.changeLanguage(lang);
-        setLan(lang);
-      };
+        localStorage.setItem("lang", lang);
+
+    };
     useEffect(() => {
         let elementId = document.getElementById("navbar");
         document.addEventListener("scroll", () => {
@@ -28,28 +54,18 @@ const Navbar = ({ data }) => {
             }
         });
         window?.scrollTo(0, 0);
-        // const lang = document.getElementsByTagName("body");
-        // if (selecLan === "AR") {
 
-        // }
     })
-    // useEffect(() => {
-    //     if (selecLan === "AR") {
-    //         document.getElementById("root")?.style?.direction = "rtl";
-    //     }
-    //     else{
-    //         document.getElementById("root")?.style?.direction = "ltr";
-    //     }
-    // }, [selecLan])
+
     useEffect(() => {
         if (selecLan === 'ar') {
             setDirection('rtl');
-            changeLanguage("ar")
+            changeLanguage("ar");
         } else {
             setDirection('ltr');
             changeLanguage("en")
         }
-    }, [selecLan]);
+    }, [i18n.language]);
 
     const classOne = collapsed ? 'collapse navbar-collapse' : 'collapse navbar-collapse show';
     const classTwo = collapsed ? 'navbar-toggler navbar-toggler-right collapsed' : 'navbar-toggler navbar-toggler-right';
@@ -101,20 +117,14 @@ const Navbar = ({ data }) => {
                                 <li className="nav-item">
                                     <LinkN href="/about-us" activeClassName="active">
                                         <a onClick={() => setCollapsed(true)} className="nav-LinkN">
-                                        {t('About Us')}
+                                            {t('About Us')}
 
                                         </a>
                                     </LinkN>
-                                    
+
                                 </li>
-
                                 <li className="nav-item">
-                                    <LinkN href="#service_section" >
-                                        <a className='servicesItem'>
-                                            {t("Services")}
-                                        </a>
-                                    </LinkN>
-
+                                    <a className='servicesItem' onClick={handleClick}>{t("Services")}</a>
                                 </li>
 
                                 {/* <li className="nav-item">
@@ -309,7 +319,7 @@ const Navbar = ({ data }) => {
                                     </div> */}
 
                                     <div className="option-item getStartedButton">
-                                        <select className="selectLan" onChange={(e) => setLan(e.target.value)}>
+                                        <select className="selectLan" onChange={(e) => changeLang(e)} value={i18n.language}>
                                             <option>en</option>
                                             <option>ar</option>
                                         </select>

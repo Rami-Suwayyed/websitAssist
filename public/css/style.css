@@ -93,7 +93,14 @@ body {
   height: 350px !important;
   margin-bottom: 20px;
 }
-
+.allprojectImage{
+  height: 300px;
+}
+.card-testimonals{
+ display: grid !important;
+ grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+ column-gap: 30px;
+}
 .ourSolution{
   height: 450px !important;
 }
@@ -124,7 +131,7 @@ body {
      
 }
 .card-container{
-  height: 300px;
+  height: auto;
   padding: 20px;
   border: 1px solid var(--border-color);
   width: 300px;
@@ -145,7 +152,7 @@ img {
 }
 .partener img{
  width: 180px !important;
- height: 50px  !important;
+ height: 180px  !important;
 }
 .starIcon{
   width: 25px !important;

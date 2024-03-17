@@ -13,10 +13,14 @@ import { useTranslation } from 'react-i18next';
 
 const AboutUs = ({ url }) => {
     const [data, setData] = useState(null);
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
 
     const getAboutData = async () => {
-        await axios.get(`${url}/get_about`).then((res) => {
+        await axios.get(`${url}/get_about`,{
+            headers:{
+                "language":localStorage.getItem("lang")
+            }
+        }).then((res) => {
             setData(res.data?.data);
         }).catch((err) => {
             console.log(err);
@@ -25,8 +29,8 @@ const AboutUs = ({ url }) => {
 
     useEffect(() => {
         getAboutData();
-    }, []);
-    console.log("abo",data)
+    }, [i18n.language]);
+    
     return (
         <>
             <PageBanner

@@ -2,20 +2,25 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
-import Reactparser from 'html-react-parser'
+import Reactparser from 'html-react-parser';
+
 const OurServices = ({ url }) => {
     const [data, setData] = useState(null);
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
 
     const getSliderData = async () => {
-        await axios.get(`${url}/get_services`).then((res) => {
+        await axios.get(`${url}/get_services`, {
+            headers:{
+                "language":localStorage.getItem("lang")
+            }
+        }).then((res) => {
             setData(res.data?.data);
 
         }).catch((err) => console.log(err))
     }
     useEffect(() => {
         getSliderData();
-    }, []);
+    }, [i18n.language]);
     return (
         <section className="services-area ptb-100 bg-f1f8fb" id='service_section'>
             <div className="container">

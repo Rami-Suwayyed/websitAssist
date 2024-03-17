@@ -8,8 +8,7 @@ const options = {
     loop: true,
     nav: true,
     dots: false,
-    autoplayHoverPause: true,
-    autoplayTimeout: 1000,
+    autoplayTimeout: 2500,
     autoplay: true,
     margin: 30,
     navText: [
@@ -36,7 +35,9 @@ const Testimonials = ({ url }) => {
 
     const getAboutData = async () => {
         await axios.get(`${url}/get_project`,{
-            
+            headers:{
+                "language":localStorage.getItem("lang")
+            }
         }).then((res) => {
             setData(res.data?.data);
         }).catch((err) => {
@@ -46,7 +47,7 @@ const Testimonials = ({ url }) => {
 
     useEffect(() => {
         getAboutData();
-    }, []);
+    }, [i18n.language]);
     React.useEffect(() => {
         setDisplay(true);
     }, [])
@@ -75,7 +76,7 @@ const Testimonials = ({ url }) => {
                                     {/* <img src="/img/projectTwo.webp" alt="image" /> */}
                                     <div className="title">
                                         <h3>{item?.title}</h3>
-                                        <span className="viewButton">View</span>
+                                        {/* <span className="viewButton">View</span> */}
                                     </div>
                                 </div>
                             </div>

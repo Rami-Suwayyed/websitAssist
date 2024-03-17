@@ -3,35 +3,33 @@ import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 import dynamic from 'next/dynamic';
 import axios from 'axios';
+import { useTranslation } from 'react-i18next';
 
 const OwlCarousel = dynamic(() => import('react-owl-carousel3'), { ssr: false });
 
 
 const Partner = ({ url }) => {
     const [data, setData] = useState(null);
+    const {t, i18n} = useTranslation();
 
-    const partnerImages = [
-        '/img/partner/partner1.png',
-        '/img/partner/partner2.png',
-        '/img/partner/partner3.png',
-        '/img/partner/partner4.png',
-        '/img/partner/partner5.png',
-        '/img/partner/partner6.png',
-    ];
 
     const getDataPar = async () => {
-        await axios.get(`${url}/get_partners`).then((res) => {
+        await axios.get(`${url}/get_partners`, {
+            headers: {
+                "language": localStorage.getItem("lang")
+            }
+        }).then((res) => {
             setData(res.data?.data);
 
         }).catch((err) => console.log(err));
     }
     useEffect(() => {
         getDataPar();
-    }, [])
+    }, [i18n.language])
     const options = {
         loop: true,
         autoplay: true,
-        autoplayTimeout: 2000, // Adjust the autoplay speed in milliseconds
+        autoplayTimeout: 2000,
         margin: 10,
         responsive: {
             0: {
@@ -51,7 +49,7 @@ const Partner = ({ url }) => {
                 <OwlCarousel className="owl-theme" {...options}>
                     {data?.map((item, index) => (
                         <div key={index} className="item">
-                            <img  src={item?.image} alt={`partner-${index + 1}`} className='partnerImage' />
+                            <img src={item?.image} alt={`partner-${index + 1}`} className='partnerImage' />
                         </div>
                     ))}
                 </OwlCarousel>

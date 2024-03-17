@@ -17,7 +17,7 @@ const Index = ({ url }) => {
         <>
             <MainBanner />
             <OurSolutions />
-            <CaseStudySlider url={url} />
+            {/* <CaseStudySlider url={url} /> */}
             <AboutUsContent />
             <OurMission />
             <OurServices url={url}/>
