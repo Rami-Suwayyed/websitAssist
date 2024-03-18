@@ -10,18 +10,22 @@ import AboutUsContent from '../components/AboutUs/AboutUsContent';
 import axios from 'axios';
 import OurMission from '../components/AboutUsTwo/OurMissionTwo';
 import { useTranslation } from 'react-i18next';
+import { useLoading } from '../store/index';
 
 const AboutUs = ({ url }) => {
     const [data, setData] = useState(null);
     const { t, i18n } = useTranslation();
+    const { setLoading } = useLoading();
 
     const getAboutData = async () => {
+        setLoading(true);
         await axios.get(`${url}/get_about`,{
             headers:{
                 "language":localStorage.getItem("lang")
             }
         }).then((res) => {
             setData(res.data?.data);
+            setLoading(false);
         }).catch((err) => {
             console.log(err);
         })

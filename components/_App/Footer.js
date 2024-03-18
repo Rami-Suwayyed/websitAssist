@@ -2,21 +2,24 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
+import { useLoading } from '../../store/index';
+
 
 const Footer = ({ data, url }) => {
     const { t } = useTranslation();
+    const { setLoading } = useLoading();
     const [dataServer, setDataServer] = useState(null);
 
     const getSliderData = async () => {
+        setLoading(true)
         await axios.get(`${url}/get_services`).then((res) => {
             setDataServer(res.data?.data);
-
+            setLoading(false);
         }).catch((err) => console.log(err))
     }
     useEffect(() => {
         getSliderData();
     }, []);
-    console.log("dataServer>>",dataServer)
     const currentYear = new Date().getFullYear();
     return (
         <footer className="footer-area bg-color">
@@ -29,16 +32,16 @@ const Footer = ({ data, url }) => {
                             </a>
 
                             <ul className="social-link">
-                                {data?.data?.social_media.map((item)=>{
+                                {data?.data?.social_media.map((item) => {
                                     return <li>
-                                    <Link href={item?.link}>
-                                        <a className="d-block" target="_blank">
-                                            <i className={`bx bxl-${item?.type}`}></i>
-                                        </a>
-                                    </Link>
-                                </li>
+                                        <Link href={item?.link}>
+                                            <a className="d-block" target="_blank">
+                                                <i className={`bx bxl-${item?.type}`}></i>
+                                            </a>
+                                        </Link>
+                                    </li>
                                 })}
-                 
+
                             </ul>
                         </div>
                     </div>
@@ -68,7 +71,7 @@ const Footer = ({ data, url }) => {
                                         <a>{t("Services")}</a>
                                     </Link>
                                 </li>
-                              
+
                             </ul>
                         </div>
                     </div>
@@ -78,15 +81,15 @@ const Footer = ({ data, url }) => {
                             <h3>{t("Our Services")}</h3>
 
                             <ul className="footer-links-list">
-                                {dataServer?.slice(0,3)?.map((item)=>{
-                                    return    <li>
-                                    <Link href={`/show-service/${item?.slug}`}>
+                                {dataServer?.slice(0, 3)?.map((item) => {
+                                    return <li>
+                                        <Link href={`/show-service/${item?.slug}`}>
                                             <a>{item?.title}</a>
                                         </Link>
                                     </li>
                                 })}
-                             
-                           
+
+
                             </ul>
                         </div>
                     </div>
@@ -119,7 +122,7 @@ const Footer = ({ data, url }) => {
 
                 <div className="footer-bottom-area">
                     <div className="row align-items-center">
-                     
+
 
                         {/* <div className="col-lg-6 col-md-6">
                             <ul>

@@ -4,13 +4,17 @@ import ServiceDetailsContent from '../../components/ServiceDetails/ServiceDetail
 import RelatedServices from '../../components/ServiceDetails/RelatedServices';
 import { useRouter } from 'next/router';
 import axios from 'axios';
+import { useLoading } from '../../store/index';
 
 const ServiceDetails = ({ url }) => {
     const [dataReated, setDataReated] = useState(null);
+    const { setLoading } = useLoading();
+
     const getDataReated = async () => {
+        setLoading(true)
         await axios.get(`${url}/get_services`).then((res) => {
             setDataReated(res.data?.data);
-
+            setLoading(false);
         }).catch((err) => console.log(err))
     }
 

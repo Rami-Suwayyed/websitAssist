@@ -69,8 +69,42 @@ Default CSS
 :root {
   scroll-behavior: inherit;
 }
+.spinner,
+.spinnerCloum{
+    background: white;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999999999;
+}
+.spinnerCloum{
+    flex-direction: column !important;
+}
+.loadingMessage{
+    text-align: center ;
+    color: var(--hover-color);
+    font-weight: 600;
+}
+.BeatLoader span{
+    background-color: var(--hover-color) !important;
+}
 .owl-carousel{
   direction: ltr !important;
+}
+.contact-form input::placeholder{
+  padding: 10px;
+}
+.contact-form textarea::placeholder{
+  padding: 10px;
+
 }
 body {
   padding: 0;
@@ -109,6 +143,7 @@ body {
   padding: 5px;
   margin: 5px;
   margin-right: 30px;
+  margin-left: 30px;
   margin-top: 8px !important;
   border-radius: 8px;
   color: var(--text2-color);

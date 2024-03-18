@@ -5,15 +5,19 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import axios from 'axios'
 import { useTranslation } from 'react-i18next';
+import Spinner from '../Loading/Spinner';
+import { useLoading } from '../../store/index';
 
 const Layout = ({ children, url }) => {
     const [data, setData] = useState(null);
+    const { isLoading, setLoading} = useLoading();
+
     const { t } = useTranslation();
     const getData = async () => {
-
+        setLoading(true)
         await axios.get(`${url}/get_settings`).then((res) => {
-            setData(res.data)
-
+            setData(res.data) 
+            setLoading(false)
         }).catch((err) => {
 
         })
@@ -21,6 +25,7 @@ const Layout = ({ children, url }) => {
     useEffect(() => {
         getData()
     }, []);
+
     return (
         <>
             <Head>
@@ -35,9 +40,10 @@ const Layout = ({ children, url }) => {
  "
                 />
             </Head>
+            {isLoading && <Spinner />}
             <Navbar data={data} />
             {children}
-            <Footer data={data} url={url}/>
+            <Footer data={data} url={url} />
             <GoTop scrollStepInPx="100" delayInMs="10.50" />
         </>
     );

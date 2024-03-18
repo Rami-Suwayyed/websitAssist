@@ -8,24 +8,27 @@ import { useTranslation } from 'react-i18next';
 const OwlCarousel = dynamic(() => import('react-owl-carousel3'), { ssr: false });
 
 
-const Partner = ({ url }) => {
+const Partner = ({ url, setLoading }) => {
     const [data, setData] = useState(null);
     const {t, i18n} = useTranslation();
 
 
     const getDataPar = async () => {
+        setLoading(true);
         await axios.get(`${url}/get_partners`, {
             headers: {
                 "language": localStorage.getItem("lang")
             }
         }).then((res) => {
             setData(res.data?.data);
+            setLoading(false);
 
         }).catch((err) => console.log(err));
     }
     useEffect(() => {
         getDataPar();
-    }, [i18n.language])
+    }, [i18n.language]);
+    
     const options = {
         loop: true,
         autoplay: true,

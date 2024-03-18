@@ -4,6 +4,7 @@ import { collapsedState } from '../../utils/recoil-atoms'
 import LinkN from '../../utils/ActiveLink';
 import { useTranslation } from 'react-i18next';
 import Head from 'next/head';
+import Spinner from '../Loading/Spinner';
 import { useRouter } from 'next/router';
 
 const Navbar = ({ data }) => {
@@ -81,6 +82,7 @@ const Navbar = ({ data }) => {
           `}
                 </style>
             </Head>
+           
             <div id="navbar" className="navbar-area">
                 <div className="tarn-nav">
                     <div className="container-fluid">

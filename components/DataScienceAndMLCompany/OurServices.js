@@ -4,17 +4,19 @@ import axios from 'axios';
 import { useTranslation } from 'react-i18next';
 import Reactparser from 'html-react-parser';
 
-const OurServices = ({ url }) => {
+const OurServices = ({ url, setLoading }) => {
     const [data, setData] = useState(null);
     const { t, i18n } = useTranslation();
 
     const getSliderData = async () => {
+        setLoading(true);
         await axios.get(`${url}/get_services`, {
             headers:{
                 "language":localStorage.getItem("lang")
             }
         }).then((res) => {
             setData(res.data?.data);
+            setLoading(false)
 
         }).catch((err) => console.log(err))
     }

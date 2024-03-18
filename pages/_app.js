@@ -15,18 +15,22 @@ import { RecoilRoot } from 'recoil'
 import App from 'next/app';
 import Layout from '../components/_App/Layout';
 const url = "https://assispanel.com/api"
+import { LoadingProvider } from '../store/index';
 
 export default class MyApp extends App {
+
     render() {
+
         const { Component, pageProps } = this.props
         return (
             <I18nextProvider i18n={i18n}>
-
+               <LoadingProvider>
                 <RecoilRoot>
                     <Layout url={url}>
                         <Component {...pageProps} url={url} />
                     </Layout>
                 </RecoilRoot>
+                </LoadingProvider>
             </I18nextProvider>
 
         );
