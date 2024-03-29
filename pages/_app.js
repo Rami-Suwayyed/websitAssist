@@ -14,7 +14,7 @@ import i18n from '../i18n'
 import { RecoilRoot } from 'recoil'
 import App from 'next/app';
 import Layout from '../components/_App/Layout';
-const url = "https://assispanel.com/api"
+const url = "https://cms.digitalassistech.com/api"
 import { LoadingProvider } from '../store/index';
 
 export default class MyApp extends App {

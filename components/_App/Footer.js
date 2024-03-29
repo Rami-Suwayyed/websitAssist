@@ -109,7 +109,7 @@ const Footer = ({ data, url }) => {
                                 </li>
                                 <li>
                                     <i className='bx bx-envelope'></i>
-                                    <a href="mailto:hello@tarn.com">{data?.data?.email}</a>
+                                    <a href={`mailto:${data?.data?.email}`}>{data?.data?.email}</a>
                                 </li>
                                 <li>
                                     <i className='bx bxs-inbox'></i>
