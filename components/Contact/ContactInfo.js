@@ -32,8 +32,8 @@ const ContactInfo = ({ data }) => {
                                 <i className='bx bx-phone-call'></i>
                             </div>
                             <h3>{t("Contact")}</h3>
-                            <p>{t("Mobile")}: <a href="tel:+44457895789">{item?.phone_number}</a></p>
-                            <p>{t("E-mail")}: <a href="mailto:hello@tracer.com">{item?.email}</a></p>
+                            <p>{t("Mobile")}: <a href={`tel:{item?.phone_number}`}>{item?.phone_number}</a></p>
+                            <p>{t("E-mail")}: <a href={`mailto:${item?.email}`}>{item?.email}</a></p>
                         </div>
                     </div>
 
